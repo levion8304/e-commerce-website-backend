@@ -2,6 +2,7 @@ const User = require("../../models/user.model");
 const Cart = require("../../models/cart.model");
 const Order = require("../../models/order.model");
 const Product = require("../../models/product.model");
+const { generateOrderId } = require("../../../../helpers/generate");
 
 // [POST] /api/v1/checkout/order
 module.exports.order = async (req, res) => {
@@ -30,6 +31,7 @@ module.exports.order = async (req, res) => {
     .then(() => {
       const newOrder = new Order({
         userId: user.id,
+        orderId: generateOrderId(15),
         status: [...Array(productsList.length)].map(() => "pending"),
         products: productsList,
       });
