@@ -18,7 +18,16 @@ const port = process.env.PORT;
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-app.use(cors());
+app.use(
+  cors({
+    allowedHeaders: ["authorization", "Content-Type"], // you can change the headers
+    exposedHeaders: ["authorization"], // you can change the headers
+    origin: "*",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    preflightContinue: false
+  });
+);
+
 
 // Database
 database.connect();
