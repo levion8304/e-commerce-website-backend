@@ -1,14 +1,13 @@
 const mongoose = require("mongoose");
 const slug = require("mongoose-slug-updater");
-const { generateOTP } = require("../../../helpers/generate");
+
 mongoose.plugin(slug);
 
 const productSchema = new mongoose.Schema(
   {
     id: {
       type: Number,
-      unique: true,
-      default: parseInt(generateOTP(9)),
+      unique: true
     },
     name: String,
     slug: {
