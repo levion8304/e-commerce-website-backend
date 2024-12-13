@@ -2,6 +2,7 @@ const Product = require("../../models/product.model");
 const User = require("../../models/user.model");
 const Category = require("../../models/category.model");
 const unidecode = require("unidecode");
+const { generateOTP } = require("../../../../helpers/generate");
 // const mongoose = require("mongoose");
 
 // [GET] /api/v1/seller/product
@@ -73,6 +74,7 @@ module.exports.add = async (req, res) => {
     const category = await Category.findOne({ seller_id: seller.id });
     const categoryId = String(category.id);
     const newProduct = new Product({
+      id: parseInt(generateOTP(9)),
       name: req.body.name,
       price: req.body.price,
       discount_rate: req.body.discountRate,
