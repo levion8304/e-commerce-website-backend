@@ -118,15 +118,6 @@ module.exports.update = async (req, res) => {
   const token = req.headers.authorization.split(" ")[1];
   const { ...userInfo } = req.body;
   try {
-    if (userInfo.phoneNumber) {
-      const regex = /^0[3|5|7|8|9]{1}[0-9]{8}$/;
-      if (!regex.test(phoneNumber)) {
-        res.status(400).json({
-          message: "Số điện thoại không đúng định dạng!",
-        });
-        return;
-      }
-    }
     await User.updateOne(
       {
         token: token,
